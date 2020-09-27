@@ -1,0 +1,48 @@
+<section style="width: 100%; background: white; height: 100%; border-radius: 20px;">
+    <ngb-tabset>
+        <ngb-tab title="Artis">
+          <ng-template ngbTabContent style="padding-left: 20px; padding-right: 20px;">
+              <br><br>
+            <div class="card bg-dark" style="width: 18rem; height: 160px;" *ngFor="let artis of listArtis">
+                <div class="card-body">
+                  <h5 class="card-title text-light">{{artis.namaArtis}}</h5>
+                  <p class="card-text text-light">{{artis.keterangan}}</p>
+                  <div class="button" style="display: flex; justify-content: space-around;">
+                    <a [href]="artis.url" target="blank" class="card-link">personal web</a>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-light">Songs</button>
+                        <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Songs</a>
+                        <a class="dropdown-item" href="#">Albums</a>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Data">
+          <ng-template ngbTabContent>
+            <!-- <form class="form-inline" [formGroup]="searchArtis">
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="nama" class="sr-only">cari provinsi</label>
+                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Search" formControlName="namaArtis">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2" (click)="search()">Search</button>
+            </form> 
+            <br><br> -->
+            <h3>Daftar Artis</h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <table datatable [dtOptions]="dtOptions" class="cards table table-sm table-hover" style="width: 100%;">
+                    </table>
+                </div>
+            </div>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>    
+</section>
+
