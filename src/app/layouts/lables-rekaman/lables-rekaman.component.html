@@ -3,17 +3,17 @@
         <ngb-tab title="Artis">
           <ng-template ngbTabContent style="padding-left: 20px; padding-right: 20px;">
               <br><br>
-           <div *ngFor="let artis of listArtis">
-              {{artis.namaArtis}}
+           <div *ngFor="let labels of listLabels">
+              {{labels.namaLabels}}
            </div>
           </ng-template>
         </ngb-tab>
         <ngb-tab title="Data">
           <ng-template ngbTabContent>
-            <form class="form-inline" [formGroup]="searchArtis">
+            <form class="form-inline" [formGroup]="searchLabels">
                 <div class="form-group mx-sm-3 mb-2">
                     <label for="nama" class="sr-only">cari provinsi</label>
-                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Search" formControlName="namaArtis">
+                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Search" formControlName="namaLabels">
                 </div>
                 <button type="submit" class="btn btn-primary mb-2" (click)="search()">Search</button>
             </form> 
@@ -24,9 +24,8 @@
                     <table datatable [dtOptions]="dtOptions" class="cards table table-sm table-hover" style="width: 100%;">
                     </table>
                 </div>
-            </div>
+            </div> 
           </ng-template>
         </ngb-tab>
       </ngb-tabset>    
 </section>
-

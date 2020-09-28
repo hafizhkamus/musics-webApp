@@ -1,0 +1,55 @@
+<section>
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="form" (ngSubmit)="save()">
+                <div class="form-group row">
+                    <label _ngcontent-c2 for="inputEmail3" class="col-sm-2 col-form-label">ID</label>
+                    <div class="col-sm-10">
+                        <input _ngcontent-c2 type="text" class="form-control ng-untouched ng-pristine ng-invalid" id="inputEmail3" placeholder="ID ( lebih dari 1000 )" formControlName="idLagu">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Judul</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control ng-untouched ng-dirty ng-invalid" id="inputPassword3" placeholder="Nama Provinsi ( lebih dari 4 )" formControlName="judul">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Durasi</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control ng-untouched ng-dirty ng-invalid" id="inputPassword3" placeholder="Nama Provinsi ( lebih dari 4 )" formControlName="durasi">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <select class="form-control selectpicker" fromControlName="idGenre" >
+                        <option *ngFor="let genre of listGenre" [value]="genre.idGenre">{{genre.namaGenre}}</option>
+                    </select>
+                </div>
+                <br>
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <select class="form-control selectpicker" formControlName="idArtis" (change)="ambilAlbums()">
+                            <option *ngFor="let artis of listArtis" [value]="artis.idArtis" [disabled]="form.get('idArtis').valid">{{artis.namaArtis}}</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <select class="form-control selectpicker" fromControlName="idAlbums" >
+                        <option *ngFor="let albums of listAlbums" [value]="albums.idAlbums">{{albums.namaAlbums}}</option>
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <input type="file" (change)="selectFile($event)">
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary">insert</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+

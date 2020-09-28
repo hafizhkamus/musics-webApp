@@ -1,40 +1,40 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { DataTableDirective } from 'angular-datatables';
-import { Subject, from } from 'rxjs';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { LablesRekaman } from 'src/app/services/lables-rekaman-service/lables-rekaman';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Genre } from '../../services/genre-service/genre';
-import { GenreService } from '../../services/genre-service/genre.service';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
+import { LablesRekamanService } from 'src/app/services/lables-rekaman-service/lables-rekaman.service';
+import { Router } from '@angular/router';
 import swal from 'sweetalert';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-genre',
-  templateUrl: './genre.component.html',
-  styleUrls: ['./genre.component.scss']
+  selector: 'app-lables-rekaman',
+  templateUrl: './lables-rekaman.component.html',
+  styleUrls: ['./lables-rekaman.component.scss']
 })
-export class GenreComponent implements OnInit, OnDestroy {
+export class LablesRekamanComponent implements OnInit, OnDestroy {
 
   @ViewChild(DataTableDirective, {static: false})
   dtElement : DataTableDirective;
   dtOptions : any;
   dtTrigger : Subject<any> = new Subject();
 
-  searchArtis : FormGroup;
+  searchLabels : FormGroup;
 
-  listGenre : Genre[];
+  listLabels : LablesRekaman[];
 
-  constructor(private _service : GenreService,private router: Router) { }
+  constructor(private _service : LablesRekamanService, private router: Router) { }
 
   ngOnInit(): void {
 
-    this.searchArtis = new FormGroup({
-      namaGenre: new FormControl('')
+    this.searchLabels = new FormGroup({
+      namaLabels: new FormControl('')
     });
 
-    this._service.dataGenre().subscribe( (data ) =>{
+    this._service.dataLabels().subscribe( (data ) =>{
       swal("Got Data!", "Artis data access", "success");
-      this.listGenre = data
+      this.listLabels = data
     }, error => {
       swal("Cannot catch data", "data is invalid indeed", "error");
     });
@@ -43,8 +43,8 @@ export class GenreComponent implements OnInit, OnDestroy {
     this.dtOptions = {
       ajax : (dataTablesParameters: any, callback) => {
         const parameters = new Map<string, any>();
-        parameters.set('namaGenre', this.searchArtis.controls.namaGenre.value)
-        that._service.getAllArtis(parameters, dataTablesParameters).subscribe( resp => {
+        parameters.set('namaLabels', this.searchLabels.controls.namaLabels.value)
+        that._service.getAllLabels(parameters, dataTablesParameters).subscribe( resp => {
           callback({
             recordsTotal : resp.recordsTotal,
             recordsFiltered : resp.recordFiltered,
@@ -57,19 +57,31 @@ export class GenreComponent implements OnInit, OnDestroy {
       processing : true,
       filter : false,
       columns: [{
-        title : 'Id Genre',
-        data : 'idGenre',
+        title : 'Id label',
+        data : 'idLabel',
         orderable : false
       },
     {
-      title: 'Nama Genre',
-      data : 'namaGenre'
+      title: 'Nama Labels',
+      data : 'namaLabels'
+    },
+    {
+      title: 'Address',
+      data : 'alamat'
+    },
+    {
+      title: 'Contact',
+      data : 'contactPerson'
+    },
+    {
+      title: 'no',
+      data : 'noTelp'
     },
     {
       title : 'action',
       orderable: false,
       render(data, type, row){
-        return `<a routerLink="/editgenre/${row.idGenre}" class="btn btn-dark btn-default edit" data-element-id="${row.idGenre}">
+        return `<a routerLink="/editlabel/${row.idLabel}" class="btn btn-dark btn-default edit" data-element-id="${row.idLabel}">
         Edit</a>`;
       },
     },
@@ -77,13 +89,15 @@ export class GenreComponent implements OnInit, OnDestroy {
       title : 'delete',
       orderable: true,
       render(data, type, row){
-        return `<button type="button" (onClick)="deleteGenre(${row.idGenre})" class="btn btn-dark btn-default edit" data-element-id="${row.idGenre}">
+        return `<button type="button" (onClick)="deleteGenre(${row.idLabel})" class="btn btn-dark btn-default edit" data-element-id="${row.idLabel}">
         Delete</button>`;
       },
     }]
     
     }
+
   }
+
 
   ngOnDestroy(): void{
     this.dtTrigger.unsubscribe();
@@ -115,7 +129,7 @@ export class GenreComponent implements OnInit, OnDestroy {
       reverseButtons: true
     }).then((result) => {
     console.log(`Delete Data By Id:` + id );
-      this._service.deleteGenre(id).subscribe(resp => {
+      this._service.deleteLabels(id).subscribe(resp => {
         console.log(resp);
         this.router.navigate[('/genre')];
       }, error => {

@@ -19,6 +19,11 @@ export class GenreService {
     .pipe(map(data => data));
   }
 
+  deleteGenre(id): Observable<any>{
+    return this._http.delete(environment.baseUrl +'/genre/delete/'+ id)
+    .pipe(map(data => data));
+  }
+
   dataGenre(): Observable<Genre[]>{
     return this._http.get(environment.baseUrl +'/genre/list-genre')
     .pipe(map(data => <Genre[]> data));

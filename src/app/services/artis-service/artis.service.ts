@@ -19,6 +19,11 @@ export class ArtisService {
     .pipe(map(data => data));
   }
 
+  deleteArtis(id): Observable<any>{
+    return this._http.delete(environment.baseUrl +'/artis/delete'+ id)
+    .pipe(map(data => data));
+  }
+
   dataArtis(): Observable<Artis[]>{
     return this._http.get(environment.baseUrl +'/artis/list-artis')
     .pipe(map(data => <Artis[]> data));
