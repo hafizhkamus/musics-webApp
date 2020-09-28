@@ -95,7 +95,7 @@ export class FormAlbumComponent implements OnInit {
     this._albumsService.insertAlbums(kabs).subscribe((data) => {
       console.log(data);
       swal("Data Saved", "list kecamatan has been updated", "success");
-      this._router.navigate(["/list-kecamatan"]);
+      this._router.navigate(["/albums"]);
     }, error => {
       swal("cannot input data", "your data is invalid", "error");
     });

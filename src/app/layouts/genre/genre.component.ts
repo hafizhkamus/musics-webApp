@@ -69,7 +69,7 @@ export class GenreComponent implements OnInit, OnDestroy {
       title : 'action',
       orderable: false,
       render(data, type, row){
-        return `<a routerLink="/editgenre/${row.idGenre}" class="btn btn-dark btn-default edit" data-element-id="${row.idGenre}">
+        return `<a href="editgenre/${row.idGenre}" class="btn btn-dark btn-default edit" data-element-id="${row.idGenre}">
         Edit</a>`;
       },
     },

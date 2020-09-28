@@ -4,9 +4,11 @@ import { Subject } from 'rxjs';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Albums } from 'src/app/services/albums-service/albums';
 import { AlbumsService } from 'src/app/services/albums-service/albums.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert';
 import Swal from 'sweetalert2';
+import { ArtisService } from 'src/app/services/artis-service/artis.service';
+import { Artis } from 'src/app/services/artis-service/artis';
 
 @Component({
   selector: 'app-albums',
@@ -21,9 +23,36 @@ export class AlbumsComponent implements OnInit, OnDestroy {
 
   searchArtis : FormGroup;
 
+  form : FormGroup;
+
+  idArtis : string;
+
   listAlbums : Albums[];
 
-  constructor(private _service : AlbumsService, private router : Router) { }
+  listArtis : Artis[];
+
+  constructor(private _service : AlbumsService,private service : ArtisService, private router : Router, private activateRoute : ActivatedRoute) { 
+
+    // if(!this.idArtis == null){
+    //   this.activateRoute.params.subscribe( rute => {
+    //     this.idArtis = rute.idArtis;
+    //     this._service.dataAlbumsByArtis(this.idArtis).subscribe( data => {
+    //       this.listAlbums = data
+    //       console.log(data);
+    //     });
+    //   });
+    // } else {
+
+      this._service.dataAlbums().subscribe( (data ) =>{
+        swal("Got Data!", "Artis data access", "success");
+        console.log(data);
+        this.listAlbums = data
+      }, error => {
+        swal("Cannot catch data", "data is invalid indeed", "error");
+      });
+  
+
+  }
 
   ngOnInit(): void {
 
@@ -31,11 +60,25 @@ export class AlbumsComponent implements OnInit, OnDestroy {
       namaAlbums: new FormControl('')
     });
 
-    this._service.dataAlbums().subscribe( (data ) =>{
+    this.form = new FormGroup({
+      idArtis: new FormControl('')
+    });
+
+    this.service.dataArtis().subscribe( (data ) =>{
       swal("Got Data!", "Artis data access", "success");
-      this.listAlbums = data
+      this.listArtis = data
     }, error => {
       swal("Cannot catch data", "data is invalid indeed", "error");
+    });
+  
+
+    this.activateRoute.params.subscribe( rute => {
+      this.idArtis = rute.idArtis;
+      this._service.dataAlbumsByArtis(this.idArtis).subscribe( data => {
+        this.listAlbums = data;
+      }, error => {
+        swal("data kosong");
+      });
     });
 
     const that = this;
@@ -96,6 +139,13 @@ export class AlbumsComponent implements OnInit, OnDestroy {
     }
 
 
+  }
+
+  ambilAlbums(): void{
+    const idArtis = this.form.get("idArtis").value;
+    this._service.dataAlbumsByArtis(idArtis).subscribe( data => {
+      this.listAlbums = data;
+    })
   }
 
 

@@ -15,12 +15,12 @@ export class AlbumsService {
   constructor( private _http : HttpClient) { }
 
   insertAlbums(albums: Albums): Observable<any>{
-    return this._http.post(environment.baseUrl +'/Albums/save', Albums)
+    return this._http.post(environment.baseUrl +'/albums/save', Albums)
     .pipe(map(data => data));
   }
 
   dataAlbumsByArtis(idArtis): Observable<Albums[]>{
-    return this._http.get(environment.baseUrl +'/list-albums/artis/'+ idArtis)
+    return this._http.get(environment.baseUrl +'/albums/list-albums/artis/'+ idArtis)
     .pipe(map(data => data as Albums[]));
   }
 
@@ -40,7 +40,7 @@ export class AlbumsService {
   }
 
   dataAlbumsById(id): Observable<Albums>{
-    return this._http.get(environment.baseUrl +'/albums/'+id)
+    return this._http.get(environment.baseUrl +'/albums/albums/'+id)
     .pipe(map(data => data as Albums));
   }
 

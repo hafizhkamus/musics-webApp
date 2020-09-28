@@ -30,7 +30,7 @@ export class GenreService {
   }
 
   dataGenreById(id): Observable<Genre>{
-    return this._http.get(environment.baseUrl +'/artis/'+id)
+    return this._http.get(environment.baseUrl +'/genre/genre/'+id)
     .pipe(map(data => data as Genre));
   }
 

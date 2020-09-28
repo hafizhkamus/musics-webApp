@@ -2,10 +2,16 @@
     <ngb-tabset>
         <ngb-tab title="Artis">
           <ng-template ngbTabContent style="padding-left: 20px; padding-right: 20px;">
-              <br><br>
-           <div *ngFor="let artis of listArtis">
-              {{artis.namaArtis}}
-           </div>
+            <div class="btn-group" style="width: 100%;" *ngFor="let artis of listArtis" >
+              <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                {{artis.namaArtis}}
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">song</a>
+                <a class="dropdown-item" routerLink="/{{artis.namaArtis}}/albums/{{artis.idArtis}}">albums</a>
+              </div>
+              <br>
+          </div>
           </ng-template>
         </ngb-tab>
         <ngb-tab title="Data">

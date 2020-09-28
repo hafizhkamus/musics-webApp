@@ -80,7 +80,7 @@ export class ArtisComponent implements OnInit, OnDestroy {
       title : 'action',
       orderable: false,
       render(data, type, row){
-        return `<a routerLink="/editartis/${row.idArtis}" class="btn btn-dark btn-default edit" data-element-id="${row.idArtis}">
+        return `<a href="editartis/${row.idArtis}" class="btn btn-dark btn-default edit" data-element-id="${row.idArtis}">
         Edit</a>`;
       }
     }]

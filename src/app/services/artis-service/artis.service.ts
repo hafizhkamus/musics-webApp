@@ -30,7 +30,7 @@ export class ArtisService {
   }
 
   dataArtisById(id): Observable<Artis>{
-    return this._http.get(environment.baseUrl +'/artis/'+id)
+    return this._http.get(environment.baseUrl +'/artis/artis/'+id)
     .pipe(map(data => data as Artis));
   }
 

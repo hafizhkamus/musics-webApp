@@ -31,7 +31,7 @@ const routes: Routes = [
     component : FormArtisComponent
   },
   {
-    path: 'editartis/ :id',
+    path: 'editartis/:id',
     component : FormArtisComponent
   },
   {
@@ -43,7 +43,7 @@ const routes: Routes = [
     component : FormGenreComponent
   },
   {
-    path: 'editgenre/ :id',
+    path: 'editgenre/:id',
     component : FormGenreComponent
   },
   {
@@ -81,6 +81,10 @@ const routes: Routes = [
   {
     path: 'editalbum/:id',
     component : FormAlbumComponent
+  },
+  {
+    path: ':namaArtis/albums/:idArtis',
+    component: AlbumsComponent
   }
 
 ];
