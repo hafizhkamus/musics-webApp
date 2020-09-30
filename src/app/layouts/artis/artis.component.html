@@ -5,9 +5,10 @@
             <div class="btn-group" style="width: 100%;" *ngFor="let artis of listArtis" >
               <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                 {{artis.namaArtis}}
+                
               </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">song</a>
+                <a class="dropdown-item" href="#">{{artis.file}}</a>
                 <a class="dropdown-item" routerLink="/{{artis.namaArtis}}/albums/{{artis.idArtis}}">albums</a>
               </div>
               <br>

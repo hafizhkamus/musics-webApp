@@ -46,15 +46,15 @@ export class FormArtisComponent implements OnInit {
   }
   
 
-  save(): void{
+  save(nameFile): void{
     console.log(this.form.value);
     const prov = new Artis();
     prov.idArtis = this.form.value.idArtis;
     prov.namaArtis = this.form.value.namaArtis;
     prov.keterangan = this.form.value.keterangan;
     prov.url = this.form.value.url;
+    prov.foto = nameFile;
     this._service.insertArtis(prov).subscribe((data) => {
-      this.upload;
       swal("Data Saved!", "list-artis has been updated", "success");
       this._router.navigate(["/artis"]);
     }, error => {
@@ -68,7 +68,6 @@ export class FormArtisComponent implements OnInit {
 
   upload(){
     this.progress = 0;
-
     this.currentFile = this.selectedFiles.item(0);
     this._service.upload(this.currentFile).subscribe(
       event => {
@@ -76,6 +75,7 @@ export class FormArtisComponent implements OnInit {
           this.progress = Math.round(100 * event.loaded /event.total);
         } else if (event instanceof HttpResponse) {
             console.log(event.body);
+            this.save(event.body.file);
         }
       }, err => {
         this.progress = 0;

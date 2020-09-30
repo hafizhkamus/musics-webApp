@@ -3,8 +3,15 @@
         <ngb-tab title="Artis">
           <ng-template ngbTabContent style="padding-left: 20px; padding-right: 20px;">
               <br><br>
-           <div *ngFor="let lagu of listLagu">
-              {{lagu.judul}}
+              <form [formGroup]="genreSearch">
+                <select formControlName="idGenre" (change)="ambilLagu()">
+                  <option *ngFor="let genre of listGenre" [value]="genre.idGenre">{{genre.namaGenre}}</option>
+                </select>
+              </form>
+           <div *ngFor="let lagu of listLagu" class="text center">
+              <p class="text-center">
+                {{lagu.judul}}
+              </p>
            </div>
           </ng-template>
         </ngb-tab>

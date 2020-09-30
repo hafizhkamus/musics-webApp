@@ -20,17 +20,17 @@ export class LaguService {
   }
 
   dataLaguByArtis(idArtis): Observable<Lagu[]>{
-    return this._http.get(environment.baseUrl +'/list-lagu/artis/'+ idArtis)
+    return this._http.get(environment.baseUrl +'/lagu/list-lagu/artis/'+ idArtis)
     .pipe(map(data => data as Lagu[]));
   }
 
   dataLagusByGenre(idGenre): Observable<Lagu[]>{
-    return this._http.get(environment.baseUrl +'/list-lagu/genre/'+ idGenre)
+    return this._http.get(environment.baseUrl +'/lagu/list-lagu/genre/'+ idGenre)
     .pipe(map(data => data as Lagu[]));
   }
 
   dataLagusByAlbums(idAlbum): Observable<Lagu[]>{
-    return this._http.get(environment.baseUrl +'/list-lagu/albums/'+ idAlbum)
+    return this._http.get(environment.baseUrl +'/lagu/list-lagu/albums/'+ idAlbum)
     .pipe(map(data => data as Lagu[]));
   }
 

@@ -67,6 +67,7 @@ export class GenreComponent implements OnInit, OnDestroy {
     },
     {
       title : 'action',
+      data : 'idGenre',
       orderable: false,
       render(data, type, row){
         return `<a href="editgenre/${row.idGenre}" class="btn btn-dark btn-default edit" data-element-id="${row.idGenre}">
@@ -75,14 +76,61 @@ export class GenreComponent implements OnInit, OnDestroy {
     },
     {
       title : 'delete',
-      orderable: true,
+      data : 'idGenre',
+      orderable: false,
       render(data, type, row){
-        return `<button type="button" (onClick)="deleteGenre(${row.idGenre})" class="btn btn-dark btn-default edit" data-element-id="${row.idGenre}">
+        return `<button type="button" class="btn btn-dark btn-default delete" data-element-id="${row.idGenre}">
         Delete</button>`;
       },
-    }]
-    
-    }
+    }]};
+      document.querySelector('body').addEventListener('click', (event) => {
+      let target = <Element>event.target;
+      if(target.tagName.toLowerCase() === 'button' && $(target).hasClass('delete')) {
+        const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+          },
+          buttonsStyling: false,
+        });
+        swalWithBootstrapButtons.fire({
+          title: 'Are you sure?',
+          text: 'You want to remove the Genre?',
+          icon: 'warning',
+          // type: 'warning'
+          showCancelButton: true,
+          showCloseButton: true,
+          confirmButtonText: 'delete!',
+          cancelButtonText: 'cancel!',
+          reverseButtons: true
+        }).then((_result) => {
+        if (_result.value) {
+          console.log(`Delete Data By Id`);
+          this._service.deleteGenre(target.getAttribute('data-element-id')).subscribe(resp => {
+            swal("data was deleted", "delete data successfuly", "success");
+            console.log(resp);
+            this.refresh();
+            this.router.navigate[('/genre')];
+          }, error => {
+            console.error(error.message);
+          });
+        } else {
+          swal('tidak jadi download');
+        }
+      });
+      }
+    });
+  }
+
+  refresh(): void {
+    window.location.reload;
+  }
+
+
+  rerender(): void {
+    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        dtInstance.draw();
+    });
   }
 
   ngOnDestroy(): void{
@@ -96,32 +144,8 @@ export class GenreComponent implements OnInit, OnDestroy {
   }
 
   deleteGenre(id : number) {
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
-      },
-      buttonsStyling: false,
-    });
-    swalWithBootstrapButtons.fire({
-      title: 'Are you sure?',
-      text: 'You want to remove the Catalog!',
-      icon: 'warning',
-      // type: 'warning'
-      showCancelButton: true,
-      showCloseButton: true,
-      confirmButtonText: 'Yes, delete!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
-    }).then((result) => {
-    console.log(`Delete Data By Id:` + id );
-      this._service.deleteGenre(id).subscribe(resp => {
-        console.log(resp);
-        this.router.navigate[('/genre')];
-      }, error => {
-        console.error(error.message);
-      });
-    });
+    
+   
   }
 
 

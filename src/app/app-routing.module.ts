@@ -11,6 +11,8 @@ import { LablesRekamanComponent } from './layouts/lables-rekaman/lables-rekaman.
 import { FormLablesRekamanComponent } from './layouts/lables-rekaman/form-lables-rekaman/form-lables-rekaman.component';
 import { FormAlbumComponent } from './layouts/albums/form-album/form-album.component';
 import { AlbumsComponent } from './layouts/albums/albums.component';
+import { DetailAlbumsComponent } from './layouts/details/detail-albums/detail-albums.component';
+import { DetailArtisComponent } from './layouts/details/detail-artis/detail-artis.component';
 
 const routes: Routes = [
   {
@@ -84,7 +86,11 @@ const routes: Routes = [
   },
   {
     path: ':namaArtis/albums/:idArtis',
-    component: AlbumsComponent
+    component: DetailArtisComponent
+  },
+  {
+    path: ':namaAlbums/lagu/:idAlbum',
+    component: DetailAlbumsComponent
   }
 
 ];

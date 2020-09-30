@@ -7,6 +7,8 @@ import { LaguService } from 'src/app/services/lagu-service/lagu.service';
 import { Router } from '@angular/router';
 import swal from 'sweetalert';
 import Swal from 'sweetalert2';
+import { GenreService } from 'src/app/services/genre-service/genre.service';
+import { Genre } from 'src/app/services/genre-service/genre';
 
 @Component({
   selector: 'app-lagu',
@@ -19,11 +21,33 @@ export class LaguComponent implements OnInit, OnDestroy {
   dtOptions : any;
   dtTrigger : Subject<any> = new Subject();
 
+  idGenre : string;
+
   searchLabels : FormGroup;
+
+  genreSearch : FormGroup;
 
   listLagu : Lagu[];
 
-  constructor(private _service : LaguService, private router : Router) { }
+  listGenre : Genre[];
+
+  constructor(private _service : LaguService,private genreService : GenreService, private router : Router) { 
+
+    this._service.dataLagu().subscribe( (data ) =>{
+      swal("Got Data!", "Artis data access", "success");
+      this.listLagu = data
+    }, error => {
+      swal("Cannot catch data", "data is invalid indeed", "error");
+    });
+
+    this.genreService.dataGenre().subscribe( (data ) =>{
+      swal("Got Data!", "Artis data access", "success");
+      this.listGenre = data
+    }, error => {
+      swal("Cannot catch data", "data is invalid indeed", "error");
+    });
+
+  }
 
   ngOnInit(): void {
 
@@ -31,11 +55,8 @@ export class LaguComponent implements OnInit, OnDestroy {
       judul: new FormControl('')
     });
 
-    this._service.dataLagu().subscribe( (data ) =>{
-      swal("Got Data!", "Artis data access", "success");
-      this.listLagu = data
-    }, error => {
-      swal("Cannot catch data", "data is invalid indeed", "error");
+    this.genreSearch = new FormGroup({
+      idGenre: new FormControl('')
     });
 
     const that = this;
@@ -97,6 +118,15 @@ export class LaguComponent implements OnInit, OnDestroy {
 
   }
 
+  ambilLagu(){
+    const idGenre = this.genreSearch.controls.idGenre.value;
+    this._service.dataLagusByGenre(idGenre).subscribe( data => {
+      this.listLagu = data;
+      this.genreSearch.get('idGenre').setValue(idGenre);
+      console.log(idGenre);
+    })
+  }
+
   ngOnDestroy(): void{
     this.dtTrigger.unsubscribe();
   }
@@ -107,33 +137,33 @@ export class LaguComponent implements OnInit, OnDestroy {
      });
   }
 
-  deleteGenre(id : number) {
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
-      },
-      buttonsStyling: false,
-    });
-    swalWithBootstrapButtons.fire({
-      title: 'Are you sure?',
-      text: 'You want to remove the Catalog!',
-      icon: 'warning',
-      // type: 'warning'
-      showCancelButton: true,
-      showCloseButton: true,
-      confirmButtonText: 'Yes, delete!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
-    }).then((result) => {
-    console.log(`Delete Data By Id:` + id );
-      this._service.deleteLagu(id).subscribe(resp => {
-        console.log(resp);
-        this.router.navigate[('/genre')];
-      }, error => {
-        console.error(error.message);
-      });
-    });
-  }
+  // deleteGenre(id : number) {
+  //   const swalWithBootstrapButtons = Swal.mixin({
+  //     customClass: {
+  //       confirmButton: 'btn btn-success',
+  //       cancelButton: 'btn btn-danger'
+  //     },
+  //     buttonsStyling: false,
+  //   });
+  //   swalWithBootstrapButtons.fire({
+  //     title: 'Are you sure?',
+  //     text: 'You want to remove the Catalog!',
+  //     icon: 'warning',
+  //     // type: 'warning'
+  //     showCancelButton: true,
+  //     showCloseButton: true,
+  //     confirmButtonText: 'Yes, delete!',
+  //     cancelButtonText: 'No, cancel!',
+  //     reverseButtons: true
+  //   }).then((result) => {
+  //   console.log(`Delete Data By Id:` + id );
+  //     this._service.deleteLagu(id).subscribe(resp => {
+  //       console.log(resp);
+  //       this.router.navigate[('/genre')];
+  //     }, error => {
+  //       console.error(error.message);
+  //     });
+  //   });
+  // }
 
 }

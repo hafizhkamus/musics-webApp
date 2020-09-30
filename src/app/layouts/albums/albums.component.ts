@@ -169,7 +169,7 @@ export class AlbumsComponent implements OnInit, OnDestroy {
     });
     swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
-      text: 'You want to remove the Catalog!',
+      text: 'You want to remove the Album?',
       icon: 'warning',
       // type: 'warning'
       showCancelButton: true,

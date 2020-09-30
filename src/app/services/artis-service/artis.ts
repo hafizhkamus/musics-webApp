@@ -4,4 +4,5 @@ export class Artis{
     namaArtis: string;
     url : string;
     keterangan : string;
+    foto : string;
 }

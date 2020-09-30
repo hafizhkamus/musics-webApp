@@ -39,8 +39,8 @@ export class AlbumsService {
     .pipe(map(data => <Albums[]> data));
   }
 
-  dataAlbumsById(id): Observable<Albums>{
-    return this._http.get(environment.baseUrl +'/albums/albums/'+id)
+  dataAlbumsById(idAlbum): Observable<Albums>{
+    return this._http.get(environment.baseUrl +'/albums/albums/'+idAlbum)
     .pipe(map(data => data as Albums));
   }
 

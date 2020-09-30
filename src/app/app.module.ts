@@ -18,6 +18,8 @@ import { LablesRekamanComponent } from './layouts/lables-rekaman/lables-rekaman.
 import { FormLablesRekamanComponent } from './layouts/lables-rekaman/form-lables-rekaman/form-lables-rekaman.component';
 import { LaguComponent } from './layouts/lagu/lagu.component';
 import { FormLaguComponent } from './layouts/lagu/form-lagu/form-lagu.component';
+import { DetailAlbumsComponent } from './layouts/details/detail-albums/detail-albums.component';
+import { DetailArtisComponent } from './layouts/details/detail-artis/detail-artis.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { FormLaguComponent } from './layouts/lagu/form-lagu/form-lagu.component'
     LablesRekamanComponent,
     FormLablesRekamanComponent,
     LaguComponent,
-    FormLaguComponent
+    FormLaguComponent,
+    DetailAlbumsComponent,
+    DetailArtisComponent
   ],
   imports: [
     BrowserModule,

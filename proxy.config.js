@@ -4,7 +4,7 @@ const PROXY_CFG = [
             "/api"
         ],
 
-        target: "http://localhost:4000",
+        target: "http://localhost:4001",
         secure: false
     }
     ]

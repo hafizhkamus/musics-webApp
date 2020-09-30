@@ -83,6 +83,14 @@ export class ArtisComponent implements OnInit, OnDestroy {
         return `<a href="editartis/${row.idArtis}" class="btn btn-dark btn-default edit" data-element-id="${row.idArtis}">
         Edit</a>`;
       }
+    },
+    {
+      title : 'delete',
+      orderable: true,
+      render(data, type, row){
+        return `<button type="button" (onClick)="deleteArtis(null, true)" class="btn btn-dark btn-default edit" data-element-id="${row.idAlbum}">
+        Delete</button>`;
+      }
     }]
     
     }
