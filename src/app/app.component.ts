@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -30,4 +31,12 @@ export class AppComponent {
       name:'record lables'
     }
   ]
+
+  constructor(public authService : AuthService){
+
+  }
+
+  onLogout(){
+    this.authService.logout;
+  }
 }

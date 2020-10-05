@@ -29,17 +29,18 @@
                               <div class="main-menu f-right d-none d-lg-block">
                                   <nav> 
                                       <ul id="navigation">
-                                          <li><a href="/home">Home</a></li>
-                                          <li><a href="/artis">Artis</a></li>
-                                          <li><a href="/albums">Albums</a></li>
-                                          <li><a href="/lagu">Songs</a></li>
-                                          <li><a href="/genre">Genre</a></li>
-                                          <li><a >Insert</a>
+                                          <li><a href="/home" *ngIf="this.authService.isAuthentic">Home</a></li>
+                                          <li><a href="/artis" *ngIf="this.authService.isAuthentic">Artis</a></li>
+                                          <li><a href="/albums" *ngIf="this.authService.isAuthentic">Albums</a></li>
+                                          <li><a href="/lagu" *ngIf="this.authService.isAuthentic">Songs</a></li>
+                                          <li><a href="/genre" *ngIf="this.authService.isAuthentic">Genre</a></li>
+                                          <li><a *ngIf="authService.isAuthenticated">Insert</a>
                                               <ul class="submenu">
                                                   <li><a *ngFor="let link of links" [routerLink]="link.link">{{link.name}}</a></li>
                                               </ul>
                                           </li>
-                                          <li><a href="/labels-rekaman">Labels</a></li>
+                                          <li><a href="/labels-rekaman" *ngIf="this.authService.isAuthentic">Labels</a></li>
+                                          <li><a href="/labels-rekaman" *ngIf="this.authService.isAuthentic" (click)="onLogout()">Logout</a></li>
                                       </ul>
                                   </nav>
                               </div>

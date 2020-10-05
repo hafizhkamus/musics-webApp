@@ -13,16 +13,23 @@ import { FormAlbumComponent } from './layouts/albums/form-album/form-album.compo
 import { AlbumsComponent } from './layouts/albums/albums.component';
 import { DetailAlbumsComponent } from './layouts/details/detail-albums/detail-albums.component';
 import { DetailArtisComponent } from './layouts/details/detail-artis/detail-artis.component';
+import { LoginPageComponent } from './layouts/login-page/login-page.component';
+import { AuthGuardService } from './services/auth/auth-guard/auth-guard.service';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {
+    path: 'login',
+    component: LoginPageComponent
+  },
+  {
     path: 'home',
-    component : HomeComponent
+    component : HomeComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'artis',

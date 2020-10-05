@@ -52,4 +52,13 @@ export class DetailArtisComponent implements OnInit {
     
   }
 
+  
+  ambilLagu(): void{
+    const idArtis = this.form.get("idArtis").value;
+    this.albumsService.dataAlbumsByArtis(idArtis).subscribe( data => {
+      this.listAlbums = data;
+    })
+  }
+
+
 }
