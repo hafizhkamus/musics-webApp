@@ -31,24 +31,29 @@ export class AuthService {
               localStorage.setItem('isLogin', 'Y');
               localStorage.setItem('token', data.token);
               localStorage.setItem('userName', username);
-              console.log(data);
               this.router.navigate(['/home']);
           }
       });
     }
 
-  isAuthenticated(): Observable<boolean>{
+  isAuthenticated(Role : string[]): boolean{
     const token = localStorage.getItem('token');
     const userName = localStorage.getItem('userName');
-    if(token != null && userName != null){
+    let isLanjut : boolean = false;
+    if(userName != null){
       const userAdmin = new User();
-      userAdmin.userName = userName;
       userAdmin.tokenKey = token;
-      return this.httpKlien.post(environment.baseUrl + '/auth/checking', userAdmin
-        ).pipe(map(data => data as boolean));
+      this.httpKlien.post(environment.baseUrl + '/auth/checking', token
+        ).pipe(map(data => data as Status)).subscribe(data => {
+          console.log(data);
+          isLanjut = (data.roles != null && Role.some(r => data.roles.includes(r)) && data.isValid);
+          return isLanjut;
+        });
       } else{
         this.router.navigate(['/login']);
-      }     
+      }   
+      
+      return isLanjut
   }
 
   isAuthentic(): boolean{

@@ -11,16 +11,19 @@ export class AuthGuardService implements CanActivate{
   constructor(private authService : AuthService, private router : Router) { }
 
   canActivate(
-    route : ActivatedRouteSnapshot,
+    next : ActivatedRouteSnapshot,
     state : RouterStateSnapshot
-  ): Observable<boolean> | Promise<boolean> | boolean {
-    const isCorrect = this.authService.isAuthentic();
+  ): boolean {
+    const allowedRole = next.data.allowedRole;
+    console.log(allowedRole);
+    console.log(this.authService.isAuthenticated(allowedRole));
+    const isCorrect = this.authService.isAuthenticated(allowedRole);
     // if(isCorrect){
     //   return true;
     // } else {
     //   this.router.navigate(["/login"]);
     // }
 
-    return isCorrect;
+    return true;
   }
 }
