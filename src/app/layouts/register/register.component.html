@@ -1,0 +1,10 @@
+<form [formGroup]="form">
+    <br>
+    <input type="text" formControlName="username">
+    <br><br>
+    <input type="text" formControlName="keyword">
+    <br><br>
+    <button type="submit" (click)="saveUser()" class="btn btn-outline-dark">
+        register
+    </button>
+</form>

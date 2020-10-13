@@ -13,10 +13,9 @@ export class AuthGuardService implements CanActivate{
   canActivate(
     next : ActivatedRouteSnapshot,
     state : RouterStateSnapshot
-  ): boolean {
+  ): Observable<boolean> | Promise<boolean>| boolean {
     const allowedRole = next.data.allowedRole;
     console.log(allowedRole);
-    console.log(this.authService.isAuthenticated(allowedRole));
     const isCorrect = this.authService.isAuthenticated(allowedRole);
     // if(isCorrect){
     //   return true;
@@ -24,6 +23,6 @@ export class AuthGuardService implements CanActivate{
     //   this.router.navigate(["/login"]);
     // }
 
-    return true;
+    return isCorrect;
   }
 }

@@ -15,6 +15,8 @@ import { DetailAlbumsComponent } from './layouts/details/detail-albums/detail-al
 import { DetailArtisComponent } from './layouts/details/detail-artis/detail-artis.component';
 import { LoginPageComponent } from './layouts/login-page/login-page.component';
 import { AuthGuardService } from './services/auth/auth-guard/auth-guard.service';
+import { RegisterComponent } from './layouts/register/register.component';
+import { UserManagementComponent } from './layouts/admin-page/user-management/user-management.component';
 
 const routes: Routes = [
   {
@@ -32,6 +34,14 @@ const routes: Routes = [
     canActivate: [AuthGuardService], 
     data : {
       allowedRole : ['role_admin']
+    }
+  },
+  {
+    path: 'home',
+    component : HomeComponent,
+    canActivate: [AuthGuardService], 
+    data : {
+      allowedRole : ['role_user']
     }
   },
   {
@@ -101,6 +111,14 @@ const routes: Routes = [
   {
     path: ':namaAlbums/lagu/:idAlbum',
     component: DetailAlbumsComponent
+  },
+  {
+    path: "register",
+    component: RegisterComponent
+  },
+  {
+    path: "user-management",
+    component: UserManagementComponent
   }
 
 ];

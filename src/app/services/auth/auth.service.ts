@@ -36,24 +36,25 @@ export class AuthService {
       });
     }
 
-  isAuthenticated(Role : string[]): boolean{
+  isAuthenticated(Role : string[]): Observable<boolean>{
     const token = localStorage.getItem('token');
     const userName = localStorage.getItem('userName');
+    var value : any;
     let isLanjut : boolean = false;
     if(userName != null){
       const userAdmin = new User();
       userAdmin.tokenKey = token;
-      this.httpKlien.post(environment.baseUrl + '/auth/checking', token
-        ).pipe(map(data => data as Status)).subscribe(data => {
-          console.log(data);
-          isLanjut = (data.roles != null && Role.some(r => data.roles.includes(r)) && data.isValid);
-          return isLanjut;
+      this.httpKlien.post(environment.baseUrl + '/auth/checking', userAdmin
+        ).pipe(map(data => data as boolean)).subscribe(data => {
+          value = data;
+          console.log(value);
+          return value;
         });
       } else{
+        value = false;
         this.router.navigate(['/login']);
-      }   
-      
-      return isLanjut
+      }     
+      return value;
   }
 
   isAuthentic(): boolean{

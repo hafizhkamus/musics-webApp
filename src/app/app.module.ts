@@ -23,6 +23,9 @@ import { DetailAlbumsComponent } from './layouts/details/detail-albums/detail-al
 import { DetailArtisComponent } from './layouts/details/detail-artis/detail-artis.component';
 import { LoginPageComponent } from './layouts/login-page/login-page.component';
 import { AuthGuardService } from './services/auth/auth-guard/auth-guard.service';
+import { RegisterComponent } from './layouts/register/register.component';
+import { RegisAdminComponent } from './layouts/admin-page/regis-admin/regis-admin.component';
+import { UserManagementComponent } from './layouts/admin-page/user-management/user-management.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { AuthGuardService } from './services/auth/auth-guard/auth-guard.service'
     FormLaguComponent,
     DetailAlbumsComponent,
     DetailArtisComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    RegisterComponent,
+    RegisAdminComponent,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,27 @@
+<section>
+    <!--for demo wrap-->
+    <h1>Fixed Table header</h1>
+    <div class="tbl-header">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
+          <tr>
+            <th>Nama User</th>
+            <th *ngFor="let role of listRole">{{role.roleName}}</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="tbl-content">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tbody>
+          <tr *ngFor="let user of listAkun">
+            <td>{{user.username}}</td>
+            <td><input type="checkbox" checked="check(user.id)" disabled></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+            <td><input type="checkbox"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
