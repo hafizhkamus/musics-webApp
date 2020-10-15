@@ -1,6 +1,6 @@
 export class Akun{
 
     id : string;
-    usernmae : string;
+    username : string;
     keyword : string;
 }

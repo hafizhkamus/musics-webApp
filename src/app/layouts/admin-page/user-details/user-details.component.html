@@ -1,0 +1,26 @@
+<div style="background: white; color: blue;" *ngFor="let acc of akun">
+    <p>
+       username :  {{acc.username}}
+    </p>
+    <br><br>
+    <table>
+        <thead>
+            <tr>
+                <th>role</th>
+                <th>
+                    value
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let role of listRole">
+                <td>
+                    {{role.roleName}}
+                </td>
+                <td>
+                    <input type="checkbox" [checked]="check()">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

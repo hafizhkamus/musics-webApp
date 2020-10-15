@@ -26,6 +26,7 @@ import { AuthGuardService } from './services/auth/auth-guard/auth-guard.service'
 import { RegisterComponent } from './layouts/register/register.component';
 import { RegisAdminComponent } from './layouts/admin-page/regis-admin/regis-admin.component';
 import { UserManagementComponent } from './layouts/admin-page/user-management/user-management.component';
+import { UserDetailsComponent } from './layouts/admin-page/user-details/user-details.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { UserManagementComponent } from './layouts/admin-page/user-management/us
     LoginPageComponent,
     RegisterComponent,
     RegisAdminComponent,
-    UserManagementComponent
+    UserManagementComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,

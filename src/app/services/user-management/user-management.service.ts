@@ -18,6 +18,11 @@ export class UserManagementService {
     .pipe(map(data => <Akun[]> data));
   }
 
+  dataAkunByID(id : String): Observable<Akun[]>{
+    return this._http.get(environment.baseUrl + '/user-info/findById/' + id)
+    .pipe(map(data => data as Akun[]));
+  }
+
   dataRoles(): Observable<Roles[]>{
     return this._http.get(environment.baseUrl +'/register/allRole')
     .pipe(map(data => <Roles[]> data));

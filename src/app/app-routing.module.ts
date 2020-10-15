@@ -17,6 +17,7 @@ import { LoginPageComponent } from './layouts/login-page/login-page.component';
 import { AuthGuardService } from './services/auth/auth-guard/auth-guard.service';
 import { RegisterComponent } from './layouts/register/register.component';
 import { UserManagementComponent } from './layouts/admin-page/user-management/user-management.component';
+import { UserDetailsComponent } from './layouts/admin-page/user-details/user-details.component';
 
 const routes: Routes = [
   {
@@ -119,6 +120,10 @@ const routes: Routes = [
   {
     path: "user-management",
     component: UserManagementComponent
+  },
+  {
+    path: "user-setting/:id",
+    component: UserDetailsComponent
   }
 
 ];

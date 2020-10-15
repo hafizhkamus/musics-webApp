@@ -5,8 +5,9 @@
       <table cellpadding="0" cellspacing="0" border="0">
         <thead>
           <tr>
+            <th>NO</th>
             <th>Nama User</th>
-            <th *ngFor="let role of listRole">{{role.roleName}}</th>
+            <th>Option</th>
           </tr>
         </thead>
       </table>
@@ -14,12 +15,10 @@
     <div class="tbl-content">
       <table cellpadding="0" cellspacing="0" border="0">
         <tbody>
-          <tr *ngFor="let user of listAkun">
+          <tr *ngFor="let user of listAkun; let i = index"> 
+            <td>{{i + 1}}</td>
             <td>{{user.username}}</td>
-            <td><input type="checkbox" checked="check(user.id)" disabled></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
-            <td><input type="checkbox"></td>
+            <td><button class="btn btn-primary" type="button" routerLink="/user-setting/{{user.id}}">Edit</button></td>
           </tr>
         </tbody>
       </table>
