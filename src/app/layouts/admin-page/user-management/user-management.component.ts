@@ -36,10 +36,6 @@ export class UserManagementComponent implements OnInit {
 
   }
 
-    check(idUser : string): boolean{
-      return this.checking.checkingSuperAdmin(idUser);
-    }
-
   test(param : string){
     console.log(this.listAkun);
     if(param != null){

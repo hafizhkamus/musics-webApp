@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Akun } from '../../../../services/user-management/akun';
 import { data } from 'jquery';
+import { GroupUser } from './group-user';
+import swal from 'sweetalert';
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +15,13 @@ export class CheckingService {
 
   constructor(private _http : HttpClient) { }
 
-  checkingSuperAdmin(idUser : string): boolean{
-    let isChecked = false;
+  checkingSuperAdmin(idUser : string): Observable<GroupUser>{
     if(idUser != null){
-      this._http.post(environment.baseUrl + '/user-info/checking-sa', idUser
-      ).pipe(map(data => data as boolean)).subscribe(data => {
-       if(data = true){
-        isChecked = data;
-        console.log(isChecked);
-        return isChecked;
-       }
-      });
+      return this._http.post(environment.baseUrl + '/user-info/checking-sa', idUser
+      ).pipe(map( data => data as GroupUser));
     } else{
-      isChecked = false;
+      swal("Checking cannot service", "be patient on your code", "error");
     }
-    return isChecked;
   }
   
 }

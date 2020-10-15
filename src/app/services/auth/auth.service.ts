@@ -36,25 +36,19 @@ export class AuthService {
       });
     }
 
-  isAuthenticated(Role : string[]): Observable<boolean>{
-    const token = localStorage.getItem('token');
-    const userName = localStorage.getItem('userName');
-    var value : any;
-    let isLanjut : boolean = false;
-    if(userName != null){
-      const userAdmin = new User();
-      userAdmin.tokenKey = token;
-      this.httpKlien.post(environment.baseUrl + '/auth/checking', userAdmin
-        ).pipe(map(data => data as boolean)).subscribe(data => {
-          value = data;
-          console.log(value);
-          return value;
-        });
-      } else{
-        value = false;
-        this.router.navigate(['/login']);
-      }     
-      return value;
+    isAuthenticated(allowedRoles: string[]): Observable<Status> {
+      const username = localStorage.getItem('username');
+      const token = localStorage.getItem('token');
+      if(username != null && token != null) {
+          console.log(allowedRoles);
+          const userAdmin = new User();
+          userAdmin.userName = username;
+          userAdmin.tokenKey = token;
+          return this.httpKlien.post(environment.baseUrl + '/auth/checking', userAdmin
+          ).pipe(map( data => data as Status));
+      } else {
+          this.router.navigate(['login']);
+      }
   }
 
   isAuthentic(): boolean{

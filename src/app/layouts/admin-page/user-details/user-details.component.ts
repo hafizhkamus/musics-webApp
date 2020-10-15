@@ -6,6 +6,8 @@ import { Akun } from 'src/app/services/user-management/akun';
 import swal from 'sweetalert';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Roles } from 'src/app/services/user-management/roles';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-details',
@@ -59,15 +61,15 @@ export class UserDetailsComponent implements OnInit {
     })
   }
 
-  check(): boolean{
-    let isCheck = false;
-    this.activateRoute.params.subscribe( rute => {
-      this.id = rute.id;
-      console.log(this.id);
-      isCheck = this.checkingService.checkingSuperAdmin(this.id);
-      return isCheck;
-    })
-    return isCheck;
+  check(id : string): Observable<boolean> | Promise<boolean> | boolean {
+    return this.checkingService.checkingSuperAdmin(id)
+    .pipe(map(data =>{
+      if(data.isCheck != false){
+        return true;
+      } else{
+        console.log("error");
+      }
+    }))
   }
 
 }
