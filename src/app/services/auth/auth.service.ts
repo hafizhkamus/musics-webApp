@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Status } from '../user/status';
 import { User } from '../user/user';
 import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable()
 
@@ -65,10 +66,36 @@ export class AuthService {
       return statusLogin;
   }
 
-    logout(){
-      localStorage.removeItem('token');
-      this.router.navigate(["/login"]);
+  logout(){
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false,
+    });
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: 'You want to logout?',
+      icon: 'warning',
+      // type: 'warning'
+      showCancelButton: true,
+      showCloseButton: true,
+      confirmButtonText: 'Logout!',
+      cancelButtonText: 'cancel!',
+      reverseButtons: true
+    }).then((_result) => {
+    if (_result.value) {
+      const token = localStorage.getItem("userName").toString();
+      this.httpKlien.delete(environment.baseUrl + '/api/auth/logout/' + token).pipe(map(data => data )).subscribe(resp => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('isLogin');
+        this.router.navigate(["/login-admin"]);
+      });
     }
+  });
+}
 
     // isAuthenticated() {
     //     const promise = new Promise(
